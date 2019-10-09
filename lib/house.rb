@@ -19,5 +19,12 @@ attr_reader :price, :address, :rooms
     room_category
   end
 
-
+  def area
+    room_area = []
+    @rooms.each do |room|
+      room_area << room.length * room.width
+    end
+    room_area.inject(:+)
+  end
+  
 end
