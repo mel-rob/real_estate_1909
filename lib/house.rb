@@ -26,5 +26,10 @@ attr_reader :price, :address, :rooms
     end
     room_area.inject(:+)
   end
-  
+
+  def price_per_square_foot
+    @price.gsub("$", "").to_f / area
+  end
+
+
 end
