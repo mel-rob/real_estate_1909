@@ -10,6 +10,8 @@ class HouseTest < Minitest::Test
     @house = House.new("$400000", "123 sugar lane")
     @room_1 = Room.new(:bedroom, 10, 13)
     @room_2 = Room.new(:bedroom, 11, 15)
+    @room_3 = Room.new(:living_room, 25, 15)
+    @room_4 = Room.new(:basement, 30, 41)
   end
 
   def test_it_exists
@@ -38,4 +40,20 @@ class HouseTest < Minitest::Test
     @house.add_room(@room_2)
     assert_equal 2, @house.rooms.count
   end
+
+  def test_rooms_from_category
+    @house.add_room(@room_1)
+    @house.add_room(@room_2)
+    assert_equal 2, @house.rooms_from_category(:bedroom).count
+
+    @house.add_room(@room_3)
+    assert_equal 1, @house.rooms_from_category(:living_room).count
+    assert_equal 2, @house.rooms_from_category(:bedroom).count
+
+    @house.add_room(@room_4)
+    assert_equal 1, @house.rooms_from_category(:basement).count
+    assert_equal 1, @house.rooms_from_category(:living_room).count
+    assert_equal 2, @house.rooms_from_category(:bedroom).count
+  end
+
 end
