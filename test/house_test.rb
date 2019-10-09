@@ -56,4 +56,12 @@ class HouseTest < Minitest::Test
     assert_equal 2, @house.rooms_from_category(:bedroom).count
   end
 
+  def test_house_area
+    @house.add_room(@room_1)
+    @house.add_room(@room_2)
+    @house.add_room(@room_3)
+    @house.add_room(@room_4)
+    assert_equal 1900, @house.area
+  end
+
 end
